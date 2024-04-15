@@ -21,8 +21,6 @@ public enum Reeeed {
         switch extractor {
         case .mercury:
             MercuryExtractor.shared.warmUp()
-        case .readability:
-            ReadabilityExtractor.shared.warmUp()
         }
     }
 
@@ -32,14 +30,6 @@ public enum Reeeed {
                 switch extractor {
                 case .mercury:
                     MercuryExtractor.shared.extract(html: html, url: url) { contentOpt in
-                        if let content = contentOpt {
-                            continuation.resume(returning: content)
-                        } else {
-                            continuation.resume(throwing: ExtractionError.FailedToExtract)
-                        }
-                    }
-                case .readability:
-                    ReadabilityExtractor.shared.extract(html: html, url: url) { contentOpt in
                         if let content = contentOpt {
                             continuation.resume(returning: content)
                         } else {

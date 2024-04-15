@@ -34,5 +34,4 @@ extension ExtractedContent {
 
 public enum Extractor: Equatable {
     case mercury
-    case readability
 }

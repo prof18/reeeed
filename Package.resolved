@@ -1,5 +1,4 @@
 {
-  "originHash" : "25a72a8e4fac8f18042e3b13d671ce1b13e876929c98d352d780bdaea37da42f",
   "pins" : [
     {
       "identity" : "fuzi",
@@ -20,5 +19,5 @@
       }
     }
   ],
-  "version" : 3
+  "version" : 2
 }

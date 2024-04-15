@@ -30,11 +30,23 @@ public struct ReeeederView: View {
     public var body: some View {
         Color(options.theme.background)
             .overlay(content)
-            .edgesIgnoringSafeArea(.all)
             .overlay(loader)
             .navigationTitle(title ?? url.hostWithoutWWW)
         #if os(iOS)
             .navigationBarTitleDisplayMode(.inline)
+            .toolbar {
+                Button {
+                    onLinkClicked(url)
+                } label: {
+                    Image(systemName: "globe")
+                }
+                
+                if #available(iOS 16.0, *) {
+                    ShareLink(item: url) {
+                        Label("Share", systemImage: "square.and.arrow.up")
+                    }
+                }
+            }
         #endif
             .task {
                 do {
