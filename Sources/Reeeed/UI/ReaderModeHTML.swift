@@ -97,18 +97,16 @@ body {
 
 #__content {
     line-height: 1.5;
-    font-size: 1.1em;
     overflow-x: hidden;
 }
 
 @media screen and (min-width: 650px) {
-    #__content { font-size: 1.35em; line-height: 1.5; }
+    #__content {  line-height: 1.5; }
 }
 
 h1, h2, h3, h4, h5, h6 {
     line-height: 1.2;
     font-family: -apple-system;
-    font-size: 1.5em;
     font-weight: 800;
 }
 
