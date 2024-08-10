@@ -222,7 +222,7 @@ figcaption, cite {
     
     <h1>\(escapedTitle)</h1>
         \(subtitle)
-        \(html)
+    <div id="__reader_container">\(html)</div>
 </div>
 
 <script>
