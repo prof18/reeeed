@@ -9,13 +9,15 @@ public struct ReeeederViewOptions {
     }
 }
 
-public struct ReeeederView: View {
+public struct ReeeederView<ToolbarView: View>: View {
     var url: URL
     var options: ReeeederViewOptions
+    @ToolbarContentBuilder let toolbarContent: () -> ToolbarView
 
-    public init(url: URL, options: ReeeederViewOptions = .init()) {
+    public init(url: URL, options: ReeeederViewOptions = .init(), @ViewBuilder toolbarContent: @escaping () -> ToolbarView) {
         self.url = url
         self.options = options
+        self.toolbarContent = toolbarContent
     }
 
     // MARK: - Implementation
@@ -35,17 +37,7 @@ public struct ReeeederView: View {
         #if os(iOS)
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
-                Button {
-                    onLinkClicked(url)
-                } label: {
-                    Image(systemName: "globe")
-                }
-                
-                if #available(iOS 16.0, *) {
-                    ShareLink(item: url) {
-                        Label("Share", systemImage: "square.and.arrow.up")
-                    }
-                }
+                toolbarContent()
             }
         #endif
             .task {
