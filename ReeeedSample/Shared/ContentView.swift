@@ -48,7 +48,9 @@ struct ArticleButton: View {
     }
 
     @ViewBuilder private var reader: some View {
-        ReeeederView(url: URL(string: url)!, options: .init(theme: theme, onLinkClicked: linkClicked))
+        ReeeederView(url: URL(string: url)!, options: .init(theme: theme, onLinkClicked: linkClicked), toolbarContent: {
+            Button("Close", action: { presented = false })
+        })
     }
 
     private func linkClicked(_ url: URL) {

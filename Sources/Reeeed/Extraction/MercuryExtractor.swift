@@ -16,13 +16,13 @@ class MercuryExtractor: NSObject, WKUIDelegate, WKNavigationDelegate {
         guard readyState == .none else { return }
         Reeeed.logger.info("Initializing...")
         readyState = .initializing
-        let mercuryJS = try! String(contentsOf: Bundle.module.url(forResource: "mercury.web", withExtension: "js")!)
+        let mercuryJS = try! String(contentsOf: Bundle.module.url(forResource: "readability", withExtension: "js")!)
         let html = """
-<body>
-    <script>\(mercuryJS)</script>
-    <script>alert('ok')</script>
-</body>
-"""
+            <html>
+                <script>\(mercuryJS)</script>
+                <script>alert('ok')</script>
+            </html>
+        """
         webview.loadHTMLString(html, baseURL: nil)
     }
 
@@ -67,7 +67,7 @@ class MercuryExtractor: NSObject, WKUIDelegate, WKNavigationDelegate {
     // TODO: queue up simultaneous requests?
     func extract(html: String, url: URL, callback: @escaping Callback) {
         waitUntilReady {
-            let script = "return await Mercury.parse(\(url.absoluteString.asJSString), {html: \(html.asJSString)})"
+            let script = "return parseContent(\(html.asJSString), \(url.absoluteString.asJSString))"
 
             self.webview.callAsyncJavaScript(script, arguments: [:], in: nil, in: .page) { result in
                 switch result {
